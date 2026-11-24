@@ -1628,6 +1628,17 @@ h1,h2,h3,h4,h5 { font-family: var(--font-h); font-weight: 700; line-height: 1.15
     font-size: .86rem !important;
     text-align: center;
   }
+  .doctor-story-aside {
+    align-self: center;
+    padding: clamp(2rem, 5vw, 4rem);
+    border-radius: var(--radius);
+    background: var(--primary-light);
+  }
+  .doctor-story-aside h3 { margin: .75rem 0 1rem; font-size: clamp(1.75rem, 3vw, 2.5rem); }
+  .doctor-story-aside p { margin-bottom: 0; }
+  .contact-direct { display: flex; flex-wrap: wrap; gap: .75rem; }
+  .contact-direct p { width: 100%; color: var(--muted); font-size: .9rem !important; }
+  .contact-info-side .visit-hours { margin-bottom: 1.5rem; }
   .locations-page { padding-top: 2rem; }
   .locations-page .office-card { min-height: 310px; }
   .locations-page .office-card address { min-height: 0; }

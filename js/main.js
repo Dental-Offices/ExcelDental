@@ -1,5 +1,5 @@
 /* =====================================================
-   Excel Dental of Wexford — Main JavaScript
+   Excel Dental of Greentree — Main JavaScript
    ===================================================== */
 
 /* === NAVBAR === */
@@ -79,93 +79,9 @@ if (revealEls.length) {
   revealEls.forEach(el => io.observe(el));
 }
 
-/* === CONTACT FORM === */
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    if (!contactForm.checkValidity()) {
-      contactForm.reportValidity();
-      return;
-    }
-
-    const smsConsent = contactForm.querySelector('[name="smsConsent"]');
-    const emailSubject = contactForm.querySelector('[name="_subject"]');
-    if (emailSubject) {
-      emailSubject.value = smsConsent?.checked
-        ? 'SMS Consent Received - Excel Dental of Wexford'
-        : 'New Contact Form Message - Excel Dental of Wexford';
-    }
-
-    const btn = contactForm.querySelector('[type="submit"]');
-    if (!btn) return;
-
-    const originalText = btn.textContent;
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-
-    try {
-      const response = await fetch(contactForm.action, {
-        method: 'POST',
-        body: new FormData(contactForm),
-        headers: { Accept: 'application/json' }
-      });
-
-      if (!response.ok) {
-        throw new Error('Request failed');
-      }
-
-      btn.textContent = 'Message Sent!';
-      btn.style.background = '#4caf50';
-      btn.style.borderColor = '#4caf50';
-      contactForm.reset();
-    } catch (err) {
-      btn.textContent = 'Try Again';
-      btn.style.background = '#b42318';
-      btn.style.borderColor = '#b42318';
-    } finally {
-      setTimeout(() => {
-        btn.textContent = originalText;
-        btn.disabled = false;
-        btn.style.background = '';
-        btn.style.borderColor = '';
-      }, 3500);
-    }
-  });
-}
-
 /* === AUTO YEAR IN FOOTER === */
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-/* === SITE NAVIGATION === */
-document.querySelectorAll('.footer-col ul').forEach(list => {
-  list.querySelectorAll('li:empty').forEach(item => item.remove());
-});
-
-const websiteFooterLinks = document.querySelector('.footer-col ul');
-if (websiteFooterLinks) {
-  [
-    ['wexford-privacy-policy.html', 'Privacy Policy'],
-    ['wexford-sms-terms.html', 'SMS Terms & Conditions']
-  ].forEach(([href, label]) => {
-    if (websiteFooterLinks.querySelector(`a[href="${href}"]`)) return;
-    const item = document.createElement('li');
-    const link = document.createElement('a');
-    link.href = href;
-    link.textContent = label;
-    item.append(link);
-    websiteFooterLinks.append(item);
-  });
-}
-
-document.querySelectorAll('.footer-col:nth-of-type(3) ul').forEach(list => {
-  if (list.querySelector('a[href="dental-sleep-medicine.html"]')) return;
-  const item = document.createElement('li');
-  item.innerHTML = '<a href="dental-sleep-medicine.html">Dental Sleep Medicine</a>';
-  list.append(item);
-});
 
 /* === ACTIVE NAV LINK === */
 (function setActiveLink() {
